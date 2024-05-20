@@ -1,12 +1,17 @@
 <script setup>
-
+import Home from './components/Home.vue';
+import Header from './components/Header.vue'
 </script>
 
 <template>
-  <h2>HELLO HUMAN</h2>
-  <div>Hello Huamn. Human is Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti pariatur obcaecati, eaque
-    error corporis quis deserunt atque sit voluptatibus et, corrupti unde! Incidunt fuga reiciendis in rem ad architecto
-    commodi.</div>
+  <main>
+    <Header/>
+    <Home />
+  </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+main {
+  padding: 1rem;
+}
+</style>
