@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <h2>HELLO WORLD</h2>
+  <h2>HELLO HUMAN</h2>
 </template>
 
 <style scoped>
