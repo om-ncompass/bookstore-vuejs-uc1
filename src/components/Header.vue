@@ -6,13 +6,17 @@
     <div class="cart-container">
       <div><img src="https://rails-assets-us.bookshop.org/ds/images/basket.76e8fe7b84404cf9232df8188db62fd33e0c6453.svg"
           alt="cart"></div>
-      <div class="cart-items-quanitity"><span>&lpar;{{ 0 }}&rpar;</span></div>
+      <div class="cart-items-quanitity"><span>&lpar;{{ cartQuanitity }}&rpar;</span></div>
     </div>
   </header>
 </template>
 
 <script setup>
 import logo from '../assets/logo.png'
+
+const props = defineProps({
+  cartQuanitity: Number
+})
 </script>
 
 <style>
