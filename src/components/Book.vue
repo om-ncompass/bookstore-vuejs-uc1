@@ -31,11 +31,12 @@ const props = defineProps({
   border: 0.5rem solid #e1e1e3;
   border-radius: 2%;
   cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+
 }
 
 .cover-container img:hover {
   transform: scale(1.1);
-  transition: all 0.2s ease-in-out;
 }
 
 .book-title {

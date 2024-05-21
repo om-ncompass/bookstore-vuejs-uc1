@@ -8,12 +8,11 @@
         </div>
         <div class="cart-items" v-for="cartItem in cartItems" :key="cartItem.id">
           <div v-if="cartItem.quantity" class="cart-item">
-            <p>{{ cartItem.title }} X {{ cartItem.quantity }}
-              <span>
-                <button class="add-item" @click="$emit('add-item', cartItem.id)">+</button>
-                <button class="remove-item" @click="$emit('remove-item', cartItem.id)">-</button>
-              </span>
-            </p>
+            <p class="item-details">{{ cartItem.title }} X {{ cartItem.quantity }} </p>
+            <span>
+              <button class="add-item" @click="$emit('add-item', cartItem.id)">+</button>
+              <button class="remove-item" @click="$emit('remove-item', cartItem.id)">-</button>
+            </span>
             <p>&#8377;{{ cartItem.price * cartItem.quantity }}</p>
           </div>
         </div>
@@ -52,7 +51,7 @@ const props = defineProps({
 
 <style scoped>
 .cart-modal-backdrop {
-  position: fixed;
+  position: absolute;
   top: 30%;
   bottom: 0;
   right: 0;
@@ -89,6 +88,7 @@ const props = defineProps({
   border: none;
   color: #fff;
   cursor: pointer;
+  transition: transform 0.1s ease-in-out;
 }
 
 .add-item {
@@ -127,16 +127,23 @@ const props = defineProps({
   color: #fff;
   background-color: #de2454;
   cursor: pointer;
+  transition: transform 0.1s ease-in-out;
 }
 
 .buttons-container>button:hover,
 .cart-item button:hover {
   transform: scale(1.05);
   background-color: #b41b43;
-  transition: all 0.1s ease-in-out;
+}
+
+.item-details {
+  width: 20ch;
+  text-overflow: ellipsis;
 }
 
 .empty-cart {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

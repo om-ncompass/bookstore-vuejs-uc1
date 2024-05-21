@@ -33,13 +33,13 @@ header {
   gap: 0.5rem;
   cursor: pointer;
   padding: 4px;
+  transition: all 0.1s ease-in-out;
 }
 
 .cart-container:hover {
   background-color: #eae9ed;
   border-radius: 10px;
   transform: scale(1.05);
-  transition: all 0.1s ease-in-out;
 }
 
 .cart-container img {

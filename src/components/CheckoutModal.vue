@@ -1,43 +1,55 @@
 <template>
-  <div class="cart-modal-backdrop" style="opacity: 1;">
-    <div class="price-info">
-      <p>Total :</p>
-      <p>&#8377;{{ totalPrice }}</p>
+  <div class="cart-modal-backdrop">
+    <div v-if="!isSubmitted">
+      <div class="price-info">
+        <p>Total :</p>
+        <p>&#8377;{{ totalPrice }}</p>
+      </div>
+      <form class="form-container">
+        <div class="form-control">
+          <input type="text" name="name" placeholder="Your full name" required>
+        </div>
+        <div class="form-control">
+          <input type="email" name="email" placeholder="Your email" required>
+        </div>
+        <div class="form-control">
+          <input type="tel" name="phone-number" placeholder="Your phone number" required>
+        </div>
+        <div class="form-control">
+          <input type="text" name="address" placeholder="Your address" required>
+        </div>
+        <div class="buttons-container form-control">
+          <button type="button" @click="handleCheckoutClose">Close</button>
+          <button type="submit" @click="handleSubmit">Submit</button>
+        </div>
+      </form>
     </div>
-    <form class="form-container">
-      <div class="form-control">
-        <input type="text" name="name" placeholder="Your full name" required>
-      </div>
-      <div class="form-control">
-        <input type="email" name="email" placeholder="Your email" required>
-      </div>
-      <div class="form-control">
-        <input type="tel" name="phone-number" placeholder="Your phone number" required>
-      </div>
-      <div class="form-control">
-        <input type="text" name="address" placeholder="Your address" required>
-      </div>
+    <div class="order-placed" v-else>
+      <p>Order placed succesfully.</p>
       <div class="buttons-container">
-
-        <button type="submit" @click="alert">Submit Order</button>
         <button type="button" @click="$emit('checkout-close')">Close</button>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
 <script setup>
-defineEmits(['checkout-close'])
+const emit = defineEmits(['checkout-close', 'form-submit'])
 
 const props = defineProps({
-  totalPrice: Number
+  totalPrice: Number,
+  isSubmitted: Boolean
 })
 
-function alert(e) {
+function handleSubmit(e) {
   e.preventDefault();
-
-  alert()
+  emit('form-submit')
 }
+
+function handleCheckoutClose() {
+  emit('checkout-close');
+}
+
 </script>
 
 <style scoped>
@@ -95,11 +107,17 @@ button {
   background-color: #de2454;
   cursor: pointer;
   margin-top: 12px;
+  transition: transform 0.1s ease-in-out;
 }
 
 button:hover {
   transform: scale(1.05);
   background-color: #b41b43;
-  transition: all 0.1s ease-in-out;
+}
+
+.order-placed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

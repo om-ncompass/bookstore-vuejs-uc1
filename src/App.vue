@@ -2,7 +2,8 @@
   <main :class="{ 'cart-open': isCartOpen || isCheckoutOpen }">
     <CartModal :cartItems="cart" v-show="isCartOpen" @cart-close="handleCartClose" @checkout-open="handleCheckoutOpen"
       @add-item="handleAddItem" @remove-item="handleRemoveItem" />
-    <CheckoutModal v-show="isCheckoutOpen" :totalPrice="totalPrice" @checkout-close="handleCheckoutClose" />
+    <CheckoutModal v-show="isCheckoutOpen" :totalPrice="totalPrice" @checkout-close="handleCheckoutClose"
+      :isSubmitted="isSubmitted" @form-submit="handleFormSubmit" />
     <Header :cartQuanitity="cartQuanitity" @cart-open="handleCartOpen" />
     <Home @add-to-cart="handleAddToCart" />
   </main>
@@ -18,6 +19,7 @@ import { computed, ref } from 'vue';
 const cart = ref([]);
 const isCartOpen = ref(false);
 const isCheckoutOpen = ref(false);
+const isSubmitted = ref(false);
 const totalPrice = ref(0);
 
 const cartQuanitity = computed(() => {
@@ -50,6 +52,7 @@ function handleCheckoutOpen(_totalPrice) {
 
 function handleCheckoutClose() {
   isCheckoutOpen.value = false;
+  isSubmitted.value = false;
 }
 
 function handleAddItem(bookId) {
@@ -60,6 +63,11 @@ function handleAddItem(bookId) {
 function handleRemoveItem(bookId) {
   const bookIndexInCart = cart.value.findIndex(item => item.id === bookId);
   cart.value[bookIndexInCart].quantity -= 1;
+}
+
+function handleFormSubmit() {
+  isSubmitted.value = true;
+  cart.value = [];
 }
 </script>
 
