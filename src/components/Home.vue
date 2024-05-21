@@ -2,13 +2,10 @@
   <div class="booklist-container">
     <div v-if="books.length" class="booklist">
       <div v-for="book in books" :key="book.id" class="book-details">
-        <Book 
-          :book="book"
-          @add-to-cart="$emit('add-to-cart')"
-        />
+        <Book :book="book" @add-to-cart="(bookData) => $emit('add-to-cart', bookData)" />
       </div>
     </div>
-    <div v-else>
+    <div v-else class="no-books">
       <h2>No books to display</h2>
     </div>
   </div>
@@ -49,5 +46,9 @@ onMounted(async () => {
   flex-direction: column;
   justify-content: space-between;
   gap: 0.6rem;
+}
+
+.no-books {
+  text-align: center;
 }
 </style>

@@ -10,7 +10,10 @@
     </h3>
     <p class="book-price">${{ book.price }}</p>
   </div>
-  <button @click="$emit('add-to-cart')">Add to cart</button>
+  <button
+    @click="$emit('add-to-cart', { id: book.id, title: book.title, author: book.authors, price: book.price, quantity: 1 })">
+    Add to cart
+  </button>
 </template>
 
 <script setup>
@@ -27,6 +30,7 @@ const props = defineProps({
   width: 80%;
   border: 0.5rem solid #e1e1e3;
   border-radius: 2%;
+  cursor: pointer;
 }
 
 .cover-container img:hover {
@@ -46,7 +50,7 @@ const props = defineProps({
   font-weight: 500;
 }
 
-.book-authors p{
+.book-authors p {
   line-height: 1;
   margin: 0.6rem 0;
 }
